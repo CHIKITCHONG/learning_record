@@ -9,3 +9,9 @@
 ### [微信小程序导航：免费视频+精品教程+DEMO集合（长期更新）](https://www.cnblogs.com/wxapp/p/5962642.html)
 ### [golang+websocket实现实时推送](https://juejin.im/post/5ac0e11f518825555e5dfd1c)
 ## main code
+### 库相关
+1.[这是应该是一个比较简单的 websocket 应用。](https://blog.csdn.net/lhtzbj12/article/details/79357336)<br>
+2.[当然这个库貌似比较旧 ，进一步的话可以研究这个库:](https://github.com/gorilla/websocket)
+### websocket 教程
+1.[阮一峰 WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)<br>
+2.https://juejin.im/post/5ac0e11f518825555e5dfd1c
