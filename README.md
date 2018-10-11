@@ -18,4 +18,5 @@
 3.[Golang代码搜集-基于websocket+vue.js的简易聊天室](https://blog.csdn.net/lhtzbj12/article/details/79357336)<br>
 4.[基于golang的websocket](https://www.jianshu.com/p/65ef71ddb910)<br>
 5.[简单的websocket应用](https://www.kancloud.cn/kancloud/web-application-with-golang/44190)<br>
-6.或者先修改项目中的websocket项目
+6.或者先修改项目中的websocket项目<br>
+7.[极简版websocket](https://www.cnblogs.com/lanyangsh/p/9190296.html)
