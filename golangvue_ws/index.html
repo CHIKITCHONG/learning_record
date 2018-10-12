@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket 与 vue.js测试的程序</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="container">
+    <div class="row" id="chatroom">
+        <div class="col-md-6 col-sm-offset-3" v-show="showLoginPanel">
+            <div class="panel panel-info  col-sm-offset-3">
+                <div class="panel-heading">登录</div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">昵称</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" value="" v-model="curuser.nickname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" value="" v-model="curuser.email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" @click="loginFun()" class="btn btn-default">登录</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" v-show="showChat">
+            <div class="alert alert-info">
+                昵称: {{curuser.nickname}} &nbsp;&nbsp; E-mail: {{curuser.email}}
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{roomname}} 在线 {{onlinenum}} 人</div>
+                <ul class="list-group" style="height: 400px;overflow: auto;">
+                    <li v-for="msg in messages" class="list-group-item">
+                        <div>{{ convertfromto(msg) }} &nbsp;&nbsp;{{msg.time}} </div>
+                        <p>{{msg.cont}}</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">发送消息</div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">发送给</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" rows="3" v-model="newmessageto" placeholder="为空将发给所有人" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">内容</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" v-model="newmessage.cont"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" @click="sendFun()" class="btn btn-default">发送</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-info" v-show="showChat">
+                <div class="panel-heading">用户列表</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>昵称</th>
+                        <th>E-mail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="user in onlineusers">
+                        <th><input type="checkbox" value="{{user.email}}" v-on:change="siglechange(user.email)" v-bind:checked="singlechecked(user.email)"></th>
+                        <td>{{user.nickname}}</td>
+                        <td>{{user.email}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let app = undefined
+    let ws = undefined
+    appinit()
+    wsinit()
+    function appinit() {
+        app = new Vue({
+            el: '#chatroom',
+            data: {
+                roomname: '简易聊天室',
+                serverid:'',
+                onlinenum: 0,
+                onlineusers: [],
+                islogin: false,
+                messages: [],
+                curuser: {
+                    nickname: "我是谁1",
+                    email: "lht1@126.com"
+                },
+                newmessage: {
+                    cont: '',
+                    to: [],
+                },
+            },
+            computed: {
+                showLoginPanel: function () {
+                    return !this.islogin
+                },
+                showChat: function () {
+                    return this.islogin
+                },
+                newmessageto: function () {
+                    let to = this.newmessage.to
+                    if (to.length == 0) {
+                        return "所有人"
+                    } else {
+                        return to.join(";")
+                    }
+                }
+            },
+            methods: {
+                sendFun: function () {
+                    let cont = this.newmessage.cont.trim()
+                    if (cont.length == 0) {
+                        alert("请输入内容")
+                        return
+                    }
+                    //发送消息
+                    let msg = {
+                        type: "msg",
+                        data: {
+                            from: this.curuser.email,
+                            to: this.newmessage.to.join(";"), //多个用分号
+                            cont: cont
+                        }
+                    }
+                    console.log(msg)
+                    ws.send(JSON.stringify(msg));
+                    this.newmessage.cont = ""
+                },
+                loginFun: function () {
+                    //登录
+                    let request = {
+                        type: "login",
+                        data: this.curuser
+                    }
+                    ws.send(JSON.stringify(request));
+                },
+                singlechecked: function (id) {
+                    return this.newmessage.to.includes(id)
+                },
+                siglechange: function (id) {
+                    //有则删除，没有则添加
+                    let i = this.newmessage.to.indexOf(id)
+                    if (i > -1) {
+                        this.newmessage.to.splice(i, 1)
+                    } else {
+                        this.newmessage.to.push(id)
+                    }
+                    console.log(this.newmessage.to)
+                },
+                convertfromto: function (msg) {
+                    let from, to
+                    if (msg.from === this.curuser.email) {
+                        from = "我"
+                    } else if (msg.from === this.serverid) {
+                        from = "服务器"
+                    } else {
+                        from = this.getuserinfo(msg.from)
+                    }
+
+                    if (msg.to.length === 0) {
+                        to = "所有人"
+                    } else {
+                        if (msg.to === this.curuser.email) {
+                            to = "我"
+                        } else {
+                            to = this.getuserinfo(msg.to)
+                        }
+                    }
+                    return `${from} to ${to}`
+                },
+                getuserinfo: function (emails) {
+                    let es= emails.split(';')
+                    let length = es.length,names=[],count = 0 //最多显示三个人名
+                    for(let i=0;i<length && count <4;i++){
+                        let u= this.onlineusers.filter((x)=>{
+                            return x.email == es[i]
+                        })
+                        if(u.length>0){
+                            count +=1
+                            names.push(u[0].nickname)
+                        }
+
+                    }
+                    let ret = names.join(';')
+                    if(count > 3){
+                        ret += '等' + length + '人'
+                    }
+                    return ret
+                }
+            }
+        })
+    }
+    function wsinit() {
+        ws = new WebSocket("ws://localhost:8080/chat")
+        try {
+            ws.onopen = function () {
+                alert("成功连接至服务器")
+            }
+            ws.onclose = function () {
+                if (ws) {
+                    ws.close();
+                    ws = null;
+                }
+                alert("连接服务器-关闭1")
+            }
+            ws.onmessage = function (ret) {
+                console.log(ret.data);
+                handleMessage(ret.data)
+            }
+            ws.onerror = function () {
+                if (ws) {
+                    ws.close()
+                    ws = null
+                }
+                alert("连接服务器-关闭2")
+            }
+        } catch (e) {
+            alert(e.message)
+        }
+    }
+    //从服务器获取消息进行处理
+    function handleMessage(d) {
+        data = JSON.parse(d)
+        if (data.type === "msg") {
+            //消息
+            app.messages.push(data.data)
+        } else if (data.type === "roominfo") {
+            //房间信息
+            app.roomname = data.data.roomname
+            app.onlinenum = data.data.onlinenum
+            app.onlineusers = data.data.onlineusers
+            app.serverid = data.data.serverid
+        } else if (data.type == "login") {
+            //登录结果
+            if (data.data.result === 1) {
+                app.islogin = true
+                alert("登录成功")
+            } else {
+                alert("登录失败")
+            }
+        }
+    }
+</script>
+</body>
+
+</html>
+
