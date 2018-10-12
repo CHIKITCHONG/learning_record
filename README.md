@@ -22,3 +22,8 @@
 4.[基于golang的websocket](https://www.jianshu.com/p/65ef71ddb910)<br>
 5.[golang echo with gorilla/websocket](http://go-echo.org/cookbook/websocket/)<br>
 6.[golang websocket simple example](https://blog.csdn.net/wangshubo1989/article/details/79140278)
+<br>
+<br>
+### 问题记录
+`1.net/url里的url.URL是一个结构体 初始化时需要填好相应的字段`
+![net/url包url.URL参数](https://github.com/CHIKITCHONG/learning_record/blob/master/WechatIMG20.png)
