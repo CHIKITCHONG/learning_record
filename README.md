@@ -17,3 +17,4 @@
 2.[用 Go 编写一个简单的 WebSocket 推送服务](https://juejin.im/post/5ac0e11f518825555e5dfd1c)<br>
 3.[Golang代码搜集-基于websocket+vue.js的简易聊天室](https://blog.csdn.net/lhtzbj12/article/details/79357336)<br>
 4.[基于golang的websocket](https://www.jianshu.com/p/65ef71ddb910)
+5.[golang echo with gorilla/websocket](http://go-echo.org/cookbook/websocket/)
