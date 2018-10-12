@@ -25,4 +25,5 @@
 <br>
 <br>
 ### 问题记录
+`1.net/url里的url.URL是一个结构体 初始化时需要填好相应的字段`
 ![net/url包url.URL参数](https://github.com/CHIKITCHONG/learning_record/blob/master/WechatIMG20.png)
