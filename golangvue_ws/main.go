@@ -3,18 +3,41 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"golang.org/x/net/websocket"
 	"io"
 	"net/http"
 	"sort"
 	"strings"
 	"time"
-
-	"golang.org/x/net/websocket"
 )
 
 const (
 	ServerID = "lhtzbj12@126.com"
 )
+
+/*
+
+需要一个 请求、发送信息类别 判断状态
+//MesssageReq 发送消息请求
+type MesssageReq struct {
+	Type string  `json:"type"` //请求的类别 login表示登录  msg表消息 users用户列表
+	Data Message `json:"data"` //用户发送的信息
+}
+
+
+断连---需要持续连接
+
+发送函数
+
+
+任务调度{
+
+	-- 收信息
+	-- 发信息
+
+}
+ */
+
 
 //LoginReq 登录请求
 type LoginReq struct {
@@ -85,6 +108,7 @@ func getType(str string) string {
 	return str[0:index]
 }
 
+
 //任务调度 用户进入、离开、消息分发
 func taskSchedule() {
 	//广播聊天室信息
@@ -92,15 +116,18 @@ func taskSchedule() {
 	for {
 		select {
 
-		case transData := <-transferDatas:
-			handleTransData(transData) //有请u求需要处理
+		case u := <-transferDatas:
+			fmt.Println("****<{transData   uuu}>*****", u)
+			handleTransData(u) //有请u求需要处理
 
 		case u := <-entering:
+			fmt.Println("****<{1u}>*****", u)
 			users[u.Email] = u //有新用户进入
 			//广播聊天室信息
 			bcroominfo <- 1
 
 		case u := <-leaving:
+			fmt.Println("****<{2u}>*****", u)
 			delete(users, u.Email) //有用户离开
 			//广播聊天室信息
 			bcroominfo <- 1
@@ -119,6 +146,7 @@ func taskSchedule() {
 		}
 	}
 }
+
 
 func handleTransData(data TransferData) {
 	//当为msg时，发给部分用户，否则发给所有人
@@ -158,6 +186,7 @@ func handleTransData(data TransferData) {
 	}
 }
 
+
 //Index 聊天室页面
 func Index(w http.ResponseWriter, req *http.Request) {
 	http.ServeFile(w, req, "index.html")
@@ -176,6 +205,7 @@ func main() {
 	}
 }
 
+
 // websocket请求处理
 func chatRoom(ws *websocket.Conn) {
 	defer ws.Close()
@@ -183,12 +213,15 @@ func chatRoom(ws *websocket.Conn) {
 	user := UserInfo{
 		Send2Client: make(chan TransferData, 10),
 	}
+
 	go send2client(ws, user)
+
 	for {
 
 		var datastr string
 		//收到消息
 		err := websocket.Message.Receive(ws, &datastr)
+		// 若换成echo,则是receive(ws, []bytes)
 		if err != nil {
 			//客户端断开连接
 			if err == io.EOF {
@@ -233,13 +266,22 @@ func chatRoom(ws *websocket.Conn) {
 	}
 }
 
+
+//{"type": "roominfo", "data": {"form":"lhhtzj12@126.com", "to":"python@126.com"}}
 //将用户消息chan里数据发送到客户端
+// {"type":"roominfo","data":{"roomname":"简易测试聊天室",
+// 							  "onlinenum":1,
+// 							  "onlineusers":[{"nickname":"python","email":"py@126.com"}],
+// 							  "serverid":"lhtzbj12@126.com"}
+// 								}
 func send2client(ws *websocket.Conn, user UserInfo) {
 	for tdata := range user.Send2Client {
 		b, _ := json.Marshal(tdata)
+		fmt.Println("指定发送给用户？", string(b))
 		websocket.Message.Send(ws, string(b))
 	}
 }
+
 
 func sendLoginResult(user UserInfo, result int, msg string) {
 	//返回登录结果
@@ -250,8 +292,10 @@ func sendLoginResult(user UserInfo, result int, msg string) {
 			Msg:    msg,
 		},
 	}
+	// user.Send2Client 是通道,往这里发消息就可以在for 捕获,然后case <-- transdata 在转成transdata之前，就已经TranferData{}格式化
 	user.Send2Client <- retunData
 }
+
 
 //给用户发送消息
 func sendMessage(user UserInfo, Form, Cont string) {
@@ -265,8 +309,10 @@ func sendMessage(user UserInfo, Form, Cont string) {
 			Cont: Cont,
 		},
 	}
+	fmt.Println("*****<{--给用户发消息--}>*****", user.Send2Client)
 	user.Send2Client <- dataout
 }
+
 
 //将用户列表从map转成[]
 func usersMap2Slice(users map[string]UserInfo) []UserInfo {
