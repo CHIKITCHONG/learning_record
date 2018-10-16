@@ -52,7 +52,7 @@ func NewAccount(svc *account.Service, ar *echo.Group)
 ![moitempty](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-2.png)
 ### patch 方法简述
 ![patch](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-3.png)
-
+## echo 的一些用法记录
 ```
 #nocontent 的作用（文档描述）
 return c.NoContent(http.StatusOK)`
@@ -60,4 +60,18 @@ return c.NoContent(http.StatusOK)`
 
 NoContent sends a response with no body and a status code.
 NoContent(code int) error
+
+
+#c.Request().UserAgent(),    
+// Request() *http.Request
 ```
+## 函数中的指针引用
+```
+type Tools struct {
+}
+
+func NewTools(tr *echo.Group) {
+	t := &Tools{}   	#去掉{}:Cannot take the address of 'Tools' 
+
+```
+
