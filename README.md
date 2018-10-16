@@ -32,7 +32,7 @@
 Browse activity  原生浏览器<br>
 json:"first_name,omitempty" validate:"omitempty,min=2" 意思是为空则不输出
 
-
+## 2018-10-16
 ```<br>
 
 #传和返回结构体都是以*结构体的方式
@@ -52,3 +52,10 @@ func NewAccount(svc *account.Service, ar *echo.Group)
 ![moitempty](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-2.png)
 ### patch 方法简述
 ![patch](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-3.png)
+
+<br>
+#### return c.NoContent(http.StatusOK)
+```
+// NoContent sends a response with no body and a status code.
+NoContent(code int) error
+```
