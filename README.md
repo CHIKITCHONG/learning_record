@@ -33,10 +33,11 @@ Browse activity  原生浏览器<br>
 json:"first_name,omitempty" validate:"omitempty,min=2" 意思是为空则不输出
 
 
-<br>
-```
-# 传和返回结构体都是以*结构体的方式
-eg
+```<br>
+
+#传和返回结构体都是以*结构体的方式
+
+eg:
 
 type Account struct {
 	svc *account.Service
