@@ -54,16 +54,20 @@ func NewAccount(svc *account.Service, ar *echo.Group)
 ![patch](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-3.png)
 ## echo 的一些用法记录
 ```
-#nocontent 的作用（文档描述）
+--1.nocontent 的作用
 return c.NoContent(http.StatusOK)`
-
-
+# 文档描述
 NoContent sends a response with no body and a status code.
 NoContent(code int) error
 
-
-#c.Request().UserAgent(),    
+--2.c.Request().UserAgent(),    
+# 文档描述
 // Request() *http.Request
+
+
+--3.c.RealIP()
+# 文档描述
+// RealIP returns the client's network address based on `X-Forwarded-For`
 ```
 ## 函数中的指针引用
 ```
@@ -75,3 +79,18 @@ func NewTools(tr *echo.Group) {
 
 ```
 
+## golang strust json 序列化操作的一些问题记录
+
+```
+// Product _
+type Product struct {
+    Name      string  `json:"name"`
+    ProductID int64   `json:"-"` // 表示不进行序列化
+    Number    int     `json:"number"`
+    Price     float64 `json:"price"`
+    IsOnSale  bool    `json:"is_on_sale,string"`
+}
+ 
+// 序列化过后，可以看见
+   {"name":"Xiao mi 6","number":10000,"price":2499,"is_on_sale":"false"}
+```
