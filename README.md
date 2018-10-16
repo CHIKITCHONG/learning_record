@@ -53,9 +53,11 @@ func NewAccount(svc *account.Service, ar *echo.Group)
 ### patch 方法简述
 ![patch](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-3.png)
 
-`return c.NoContent(http.StatusOK)`
-
 ```
+#nocontent 的作用（文档描述）
+return c.NoContent(http.StatusOK)`
+
+
 NoContent sends a response with no body and a status code.
 NoContent(code int) error
 ```
