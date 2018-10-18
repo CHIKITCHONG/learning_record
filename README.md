@@ -94,3 +94,17 @@ type Product struct {
 // 序列化过后，可以看见
    {"name":"Xiao mi 6","number":10000,"price":2499,"is_on_sale":"false"}
 ```
+## 20181018
+![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-1.png)
+```
+service/user_test.go
+
+根据service.NewUser的路有要求：NewUser(svc *user.Service, ur *echo.Group)
+需要一个新的user的service服务，和一个已分组的echo路由
+user.New(nil, tt.udb, tt.rbac, tt.auth)是已经初始化的user的service对象，rg是echo的r路由的分组
+```
+![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-2.png)
+```
+strconv.Atoic.Param("id"),这样捕获的id之后，strconv.Atoic.Param将只接受数字类型，
+如果不是的话，就会报错
+```
