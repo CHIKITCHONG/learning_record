@@ -108,3 +108,4 @@ user.New(nil, tt.udb, tt.rbac, tt.auth)是已经初始化的user的service对象
 strconv.Atoic.Param("id"),这样捕获的id之后，strconv.Atoic.Param将只接受数字类型，
 如果不是的话，就会报错
 ```
+`http://tool.oschina.net/codeformat/json`在线格式化代码
