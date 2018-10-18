@@ -32,7 +32,7 @@
 Browse activity  原生浏览器<br>
 json:"first_name,omitempty" validate:"omitempty,min=2" 意思是为空则不输出
 
-
+## 2018-10-16
 ```<br>
 
 #传和返回结构体都是以*结构体的方式
@@ -52,3 +52,45 @@ func NewAccount(svc *account.Service, ar *echo.Group)
 ![moitempty](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-2.png)
 ### patch 方法简述
 ![patch](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-3.png)
+## echo 的一些用法记录
+```
+--1.nocontent 的作用
+return c.NoContent(http.StatusOK)`
+# 文档描述
+NoContent sends a response with no body and a status code.
+NoContent(code int) error
+
+--2.c.Request().UserAgent(),    
+# 文档描述
+// Request() *http.Request
+
+
+--3.c.RealIP()
+# 文档描述
+// RealIP returns the client's network address based on `X-Forwarded-For`
+```
+## 函数中的指针引用
+```
+type Tools struct {
+}
+
+func NewTools(tr *echo.Group) {
+	t := &Tools{}   	#去掉{}:Cannot take the address of 'Tools' 
+
+```
+
+## golang strust json 序列化操作的一些问题记录
+
+```
+// Product _
+type Product struct {
+    Name      string  `json:"name"`
+    ProductID int64   `json:"-"` // 表示不进行序列化
+    Number    int     `json:"number"`
+    Price     float64 `json:"price"`
+    IsOnSale  bool    `json:"is_on_sale,string"`
+}
+ 
+// 序列化过后，可以看见
+   {"name":"Xiao mi 6","number":10000,"price":2499,"is_on_sale":"false"}
+```
