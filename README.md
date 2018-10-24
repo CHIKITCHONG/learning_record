@@ -113,3 +113,5 @@ strconv.Atoic.Param("id"),这样捕获的id之后，strconv.Atoic.Param将只接
 
 ## 20181023
 [psql的一些命令](https://blog.csdn.net/smstong/article/details/17138355)
+## 20181024
+#### 微信小程序不支持PATCH方法，请注意
