@@ -117,6 +117,6 @@ strconv.Atoic.Param("id"),这样捕获的id之后，strconv.Atoic.Param将只接
 #### 微信小程序不支持PATCH方法，请注意
 ## 20181025
 #### ![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181025-1.jpg)
-#### redis 取出time.duration 类型可用其.second方法来转换为float64类型来判断是否超时
+### redis 取出time.duration 类型可用其.second方法来转换为float64类型来判断是否超时
 ![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-1.png)可用
 ![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-1.png)
