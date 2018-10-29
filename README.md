@@ -122,4 +122,9 @@ strconv.Atoic.Param("id"),这样捕获的id之后，strconv.Atoic.Param将只接
 ![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-1.png)
 ## 20181029
 golang websocket 微服务<br>
-https://blog.csdn.net/yueguanghaidao/article/details/46334483
+https://blog.csdn.net/yueguanghaidao/article/details/46334483<br>
+```
+一个专门做推送的库，是哔哩哔哩现在用的弹幕库：
+https://github.com/Terry-Mao/goim
+https://www.kancloud.cn/liupengjie/go/706202
+```
