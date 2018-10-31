@@ -128,3 +128,52 @@ https://blog.csdn.net/yueguanghaidao/article/details/46334483<br>
 https://github.com/Terry-Mao/goim
 https://www.kancloud.cn/liupengjie/go/706202
 ```
+## 2018-10-31
+一些题：
+#### Short Declairation
+```
+# Assuming x is declared and y isnot declared, which clauses below are correct?
+x; _ := f()
+x, _ = f()
+x, y := f()
+x, y = f()
+```
+#### Subslice
+```
+# what will be printed when the code is executed?
+package main
+
+import (
+   "fmt"
+)
+func main(){
+    s := []int{1,2,3}
+    ss := s [1:]
+    ss =append(ss, 4)
+    
+    for _, v :range ss{
+        ss[i] += 10
+    }
+    
+    for i := range ss{
+        ss[i] += 10
+    }
+    fmt.Println(s)
+}
+```
+#### Map Ok-Idiom
+
+```
+# correct two mistakes in lineA and B
+
+package main
+
+func main(){
+    var m map[string]int  //A
+    m["a"] = 1
+    if v := m["b"]; v!= nil {	//B
+    	Println(v)
+    }
+}
+```
+#### 
