@@ -176,4 +176,41 @@ func main(){
     }
 }
 ```
-#### 
+
+#### Pointers
+
+```
+# Fill in the blanks in lineA and B,to assure the printed out is "foo"
+
+package main
+
+type S struct {
+    m string
+}
+
+func f() *S {
+    return  _  		//A 
+}
+
+func main() {
+    p := _   		//B
+    print(p, m)		//print "foo"
+}
+// Todo
+```
+
+#### Break Outer Loop
+```
+# Modify the code below, to exit the outer for loop?
+
+package main 
+
+func main() {
+    for i := 0; i < 3; i ++ {
+	for j := 0; j < 3; j++ {
+	    print(i, ",", j, " ")
+	    break
+	}
+	println()
+}
+```
