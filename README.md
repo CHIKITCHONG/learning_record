@@ -235,3 +235,6 @@ func main() {
     println(string(b))
 }
 ```
+## 2018-11-2
+
+post请求 $ curl 127.0.0.1:5342/ws/push -d "id=1&content=hello12"
