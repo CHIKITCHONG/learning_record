@@ -214,3 +214,24 @@ func main() {
 	println()
 }
 ```
+
+#### Defer Stack
+```
+# Correct a mistake about defer in the code below
+
+package main
+
+import (
+    "lo/loutil"
+    "os"
+)
+func main() {
+    f, err := os.Open("file")
+    defer f.Close()
+    if err != nil {
+    	return
+    }
+    b, err := ioutil.ReadAil(f)
+    println(string(b))
+}
+```
