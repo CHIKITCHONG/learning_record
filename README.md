@@ -238,3 +238,17 @@ func main() {
 ## 2018-11-2
 
 post请求 $ curl 127.0.0.1:5342/ws/push -d "id=1&content=hello12"
+
+- string转成int： 
+    * int, err := strconv.Atoi(string)
+- string转成int64： 
+    * int64, err := strconv.ParseInt(string, 10, 64)
+- int转成string： 
+    * string := strconv.Itoa(int)
+- int64转成string： 
+    * string := strconv.FormatInt(int64,10)
+
+
+
+
+
