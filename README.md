@@ -248,7 +248,20 @@ post请求 $ curl 127.0.0.1:5342/ws/push -d "id=1&content=hello12"
 - int64转成string： 
     * string := strconv.FormatInt(int64,10)
 
+## 2018-1103
+- go在mac上的安装与配置
 
+#### 1
+- brew install go之后
+    * go env 查看一下go环境看看是否安装好
+- vim ~/.bash_profile
+```
+#GOPATH
+export GOPATH=/Users/michael2008s/Develop/golang
+
+#GOPATH bin
+PATH="$GOPATH/bin:$PATH"
+```
 
 
 
