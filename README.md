@@ -267,4 +267,44 @@ PATH="$GOPATH/bin:$PATH"
 - $ source ~/.bash_profile
 - 完成
 
+## 201811-04
+
+`golang判断key是否在map中`
+```
+if _, ok := map[key]; ok {
+//存在
+}
+
+另外golang也没有提供item是否在array当中的判断方法,如果程序里面频繁用到了这种判断,可以将array转化为以array当中的成员为key的map再用上面的方法进行判断,这样会提高判断的效率.
+```
+#### go语言选择语句 switch case
+
+```
+switch i { 
+    case 0: 
+        fmt.Printf("0") 
+    case 1: 
+        fmt.Printf("1") 
+    case 2: 
+        fallthrough 
+    case 3: 
+        fmt.Printf("3") 
+    case 4, 5, 6: 
+        fmt.Printf("4, 5, 6") 
+    default: 
+        fmt.Printf("Default") 
+}
+
+运行上面的案例，将会得到如下结果： 
+ i = 0时，输出0； 
+ i = 1时，输出1； 
+ i = 2时，输出3；
+
+ i = 3时，输出3； 
+
+ i = 4时，输出4, 5, 6； 
+ i = 5时，输出4, 5, 6； 
+ i = 6时，输出4, 5, 6； 
+ i = 其他任意值时，输出Default
+```
 
