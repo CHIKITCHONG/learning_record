@@ -308,3 +308,6 @@ switch i {
  i = 其他任意值时，输出Default
 ```
 
+#### 2018-11-06
+
+##### curl 127.0.0.1:5342/ws/push?id=1 -d "orderNumber=100&storekeeperID=1&ActualPrice=666&OrderStatus=888&PaymentStatus=999"
