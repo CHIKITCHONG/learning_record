@@ -311,3 +311,7 @@ switch i {
 #### 2018-11-06
 
 ##### curl 127.0.0.1:5342/ws/push?id=1 -d "orderNumber=100&storekeeperID=1&ActualPrice=666&OrderStatus=888&PaymentStatus=999&StoreName=深圳湾1号&DistributorName=xxx"
+
+
+#### 2018-11-07
+`让外网可以访问本地的好软件：https://ngrok.com/docs#global`
