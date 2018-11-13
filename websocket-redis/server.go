@@ -6,9 +6,7 @@ import (
 	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
-	"strconv"
 	"sync"
-	"time"
 )
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
@@ -18,7 +16,7 @@ var upgrader = websocket.Upgrader{
 var serverAddress = ":5342"
 
 // required : 线程安全的websocket 对象,安全关闭
-//
+// 刷新两次也会卡
 var (
 	cache     *Cache
 	pubSub    *redis.PubSubConn  	// redis 订阅服务
@@ -74,11 +72,6 @@ func (c *Cache) newUser(conn *websocket.Conn, id string) *User {
 	return u
 }
 
-func start() (object, err error){
-
-
-	return nil, nil
-}
 
 func main() {
 	// 开启redis服务
@@ -116,23 +109,24 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 	// 创建一个根据user_id的独立通道
 	u := cache.newUser(conn, r.FormValue("id"))
 	log.Printf("user %s joined\n", u.ID)
-	heart_id, err := strconv.Atoi(r.FormValue(r.FormValue("id")))
-	go func() {
-		var (
-			err error
-		)
-		for {
-			if err = conn.WriteMessage(heart_id, []byte("heartbeat")); err != nil {
-				return
-			}
-			time.Sleep(2 * time.Second)
-		}
-	}()
+	//heart_id, err := strconv.Atoi(r.FormValue(r.FormValue("id")))
+	//go func() {
+	//	var (
+	//		err error
+	//	)
+	//	for {
+	//		if err = u.conn.WriteMessage(heart_id, []byte("heartbeat")); err != nil {
+	//			u.conn.Close()
+	//		}
+	//		time.Sleep(30 * time.Second)
+	//	}
+	//}()
 	for {
 		var m Message
-
 		if err := u.conn.ReadJSON(&m); err != nil {
+			u.conn.Close()
 			log.Printf("error on ws. message %s\n", err)
+			break
 		}
 
 		if c, err := redisConn(); err != nil {
@@ -142,23 +136,24 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 			c.Do("PUBLISH", m.DeliveryID, string(m.Content))
 		}
 	}
-
+	defer conn.Close()
 	// 心跳机制,启动线程,不断发消息
-	go func() {
-		var (
-			err error
-		)
-		for {
-			resultID, errors := strconv.Atoi(r.FormValue("id"))
-			if errors != nil {
-				return
-			}
-			if err = u.conn.WriteMessage(resultID, []byte(" ")); err != nil {
-				u.conn.Close()
-			}
-			time.Sleep(120 * time.Second)
-		}
-	}()
+	//go func() {
+	//	var (
+	//		err error
+	//	)
+	//	for {
+	//		resultID, errors := strconv.Atoi(r.FormValue("id"))
+	//		if errors != nil {
+	//			return
+	//		}
+	//		if err = u.conn.WriteMessage(resultID, []byte(" ")); err != nil {
+	//			u.conn.Close()
+	//			break
+	//		}
+	//		time.Sleep(120 * time.Second)
+	//	}
+	//}()
 }
 
 //func (conn *Cache)Close(){
@@ -213,7 +208,7 @@ func (c *Cache) findAndDeliver(userID string, content string) {
 				u.conn.Close()
 				log.Printf("error on message delivery through ws. e: %s\n", err)
 			} else {
-				log.Printf("user %s found at our store, message sent\n 错误的关闭", userID)
+				log.Printf("user %s found at our store, message sent\n", userID)
 			}
 			return
 		}
