@@ -315,3 +315,6 @@ switch i {
 
 #### 2018-11-07
 `让外网可以访问本地的好软件：https://ngrok.com/docs#global`
+
+#### 2018-11-08
+linux的grep命令https://blog.csdn.net/tenfyguo/article/details/6387786 
