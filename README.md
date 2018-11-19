@@ -321,3 +321,7 @@ docker镜像下载 https://hub.docker.com/
 `git 回退`
 1.git log查看日志,拿到commit编号
 2.git reset --hard 4b67d6c153666ad57f4311380e8f51b915a73d70
+
+
+`git limit与offset`
+![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-19.png)
