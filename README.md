@@ -315,3 +315,9 @@ switch i {
 linux的grep命令`https://blog.csdn.net/tenfyguo/article/details/6387786`
 网关限速`https://www.krakend.io/`
 docker镜像下载 https://hub.docker.com/
+
+
+#### 2018-11-19
+`git 回退`
+1.git log查看日志,拿到commit编号
+2.git reset --hard 4b67d6c153666ad57f4311380e8f51b915a73d70
