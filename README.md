@@ -329,8 +329,19 @@ docker镜像下载 https://hub.docker.com/
 #### 2018-11-20
 ##### 阿里云oss 封禁小程序请求问题
 ###### 小程序请求图片时，访问阿里云oss资源遭到403forbidden 
-![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-1.jpg)
+![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-1.jpg)<br>
 `解决方法是：`
 https://www.zhihu.com/question/63977821
 ###### 在阿里云设置二级域名映射所有请求，并打开https服务
 
+```
+不仅小程序屏蔽阿里云OSS，微信也屏蔽OSS，除了图片可正常打开，其他的word、excel、rar等文件路径都被屏蔽。解决办法就是在阿里云OSS--bucket--域名管理，增加自定义的二级域名路径代替“http://XXXX.oss-cn-hangzhou.aliyuncs.com/”，这样微信就不会屏蔽了。
+```
+![pic2](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23_2.jpg)
+```
+---------2018.5.3更新----------
+关于https问题，可以购买或申请阿里云免费的“CA证书服务”。在阿里云OSS--bucket--域名管理先增加域名绑定，再点击“证书托管”，填写公钥与私钥。这样资源文件就支持http和https两种方式访问了。
+```
+![pic3](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-3.jpg)
+
+##### 知乎上
