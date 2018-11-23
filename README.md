@@ -329,8 +329,27 @@ docker镜像下载 https://hub.docker.com/
 #### 2018-11-20
 ##### 阿里云oss 封禁小程序请求问题
 ###### 小程序请求图片时，访问阿里云oss资源遭到403forbidden 
-![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-1.jpg)
+![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-1.jpg)<br>
 `解决方法是：`
 https://www.zhihu.com/question/63977821
 ###### 在阿里云设置二级域名映射所有请求，并打开https服务
+
+```
+不仅小程序屏蔽阿里云OSS，微信也屏蔽OSS，除了图片可正常打开，其他的word、excel、rar等文件路径都被屏蔽。解决办法就是在阿里云OSS--bucket--域名管理，增加自定义的二级域名路径代替“http://XXXX.oss-cn-hangzhou.aliyuncs.com/”，这样微信就不会屏蔽了。
+```
+![pic2](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23_2.jpg)
+```
+---------2018.5.3更新----------
+关于https问题，可以购买或申请阿里云免费的“CA证书服务”。在阿里云OSS--bucket--域名管理先增加域名绑定，再点击“证书托管”，填写公钥与私钥。这样资源文件就支持http和https两种方式访问了。
+```
+![pic3](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-3.jpg)
+
+##### 知乎上的另一个关于此问题的回答
+```
+这两天被这个问题烦的头都大了。首先微信必须要求uploadfile的链接必须是https，而且必须是合法域名。而我们公司用的是阿里oss的服务，在添加uploadfile的时候，oss的域名被微信封禁（原因都懂）。所以当时我们想了两个方案，1.上传经过后端ng转一下，这样会有带宽问题 2.阿里云的oss支持配置自定义域名，但是仅支持http的。因为项目急着上线就临时方案1解决。后来晚上回去越想越不对劲，因为我们的服务是支持上传视频的，而且高峰期的qps很高，所以带宽隐患很大。第二天联系了一下阿里云的技术咨询了下，可以通过cdn加速，同时配置cdn的https证书。 最后落实到业务上：需要一个https的业务域名需要一个阿里cdn的cname需要cdn https安全加速需要给cdn配置源站
+```
+HTTPS安全加速设置_HTTPS安全加速_增值服务_用户指南_CDN-阿里云：https://help.aliyun.com/document_detail/27118.html
+
+#### golang 包管理工具 --vendor、gomod
+https://ieevee.com/tech/2018/08/28/go-modules.html
 
