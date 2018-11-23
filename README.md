@@ -350,3 +350,6 @@ https://www.zhihu.com/question/63977821
 ```
 HTTPS安全加速设置_HTTPS安全加速_增值服务_用户指南_CDN-阿里云：https://help.aliyun.com/document_detail/27118.html
 
+#### golang 包管理工具 --vendor、gomod
+https://ieevee.com/tech/2018/08/28/go-modules.html
+
