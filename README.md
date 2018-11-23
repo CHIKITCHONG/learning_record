@@ -355,3 +355,7 @@ https://ieevee.com/tech/2018/08/28/go-modules.html
 
 #### sql What does DESC do in SQL?
 ![pic5](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-4.png)
+
+
+#### sql limit and offset
+![pic6](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-5.png)
