@@ -325,3 +325,12 @@ docker镜像下载 https://hub.docker.com/
 
 `git limit与offset`
 ![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-19.png)
+
+#### 2018-11-20
+##### 阿里云oss 封禁小程序请求问题
+###### 小程序请求图片时，访问阿里云oss资源遭到403forbidden 
+![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-1.jpg)
+`解决方法是：`
+https://www.zhihu.com/question/63977821
+###### 在阿里云设置二级域名映射所有请求，并打开https服务
+
