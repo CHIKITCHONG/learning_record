@@ -323,7 +323,7 @@ docker镜像下载 https://hub.docker.com/
 2.git reset --hard 4b67d6c153666ad57f4311380e8f51b915a73d70
 
 
-`git limit与offset`
+`sql limit与offset`
 ![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-19.png)
 
 #### 2018-11-20
@@ -353,3 +353,5 @@ HTTPS安全加速设置_HTTPS安全加速_增值服务_用户指南_CDN-阿里�
 #### golang 包管理工具 --vendor、gomod
 https://ieevee.com/tech/2018/08/28/go-modules.html
 
+#### sql What does DESC do in SQL?
+![pic5](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-4.png)
