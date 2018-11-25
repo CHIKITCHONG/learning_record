@@ -359,3 +359,18 @@ https://ieevee.com/tech/2018/08/28/go-modules.html
 
 #### sql limit and offset
 ![pic6](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-5.png)
+
+
+
+### 2018-11-25
+
+#### linux command review
+```
+# history 查看在终端输入的命令
+
+# date 查看时间
+
+# env 系统设置的环境变量
+
+# 
+```
