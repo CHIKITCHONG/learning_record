@@ -372,5 +372,24 @@ https://ieevee.com/tech/2018/08/28/go-modules.html
 
 # env 系统设置的环境变量
 
-# 
+# history | grep git 查看所有输入的历史中git 的命令
+
+# mv one.py one.md 把one.py改名为one.md
 ```
+
+#### vim cheat sheet(https://vim.rtorr.com/lang/zh_cn/)
+
+##### 一般模式
+```
+  - 0 :跳到行头
+  - shift + $ :跳到行尾
+  - G: 移动到文件的最后一行
+  - gg:移动到文件首行 
+  - :set nu   # 设置行号
+  - x:删除光标处的内容
+  - dd:删除整行		  # 注：dd是剪切，内容会在剪切板
+  - ndd:光标处往下删n行	# eg：3dd,往光标处下删三行
+  - u:撤销
+  - yy:复制当前行 p:黏贴当前行
+```
+##### 编辑
