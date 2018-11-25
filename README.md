@@ -376,6 +376,7 @@ https://ieevee.com/tech/2018/08/28/go-modules.html
 
 # mv one.py one.md 把one.py改名为one.md
 ```
+#### gui 编程就前端用异步。。
 
 #### vim cheat sheet(https://vim.rtorr.com/lang/zh_cn/)
 
@@ -393,3 +394,4 @@ https://ieevee.com/tech/2018/08/28/go-modules.html
   - yy:复制当前行 p:黏贴当前行
 ```
 ##### 编辑
+
