@@ -398,3 +398,30 @@ https://ieevee.com/tech/2018/08/28/go-modules.html
 ```
 ##### 编辑
 
+
+### 2018-11-26
+
+#### pgorm 的一些相关东西
+##### Select first 20 books:
+```
+var books []Book
+err := db.Model(&books).Order("id ASC").Limit(20).Select()
+// SELECT "book"."id", "book"."title", "book"."text"
+// FROM "books"
+// ORDER BY id ASC LIMIT 20
+```
+
+##### Select book by primary key:
+```
+book := &Book{Id: 1}
+err := db.Select(book)
+// SELECT "book"."id", "book"."title", "book"."text"
+// FROM "books" WHERE id = 1
+```
+#### 同上，另一种写法
+```
+book := new(Book)
+err := db.Model(book).Where("id = ?", 1).Select()
+// SELECT "book"."id", "book"."title", "book"."text"
+// FROM "books" WHERE id = 1
+```
