@@ -499,4 +499,5 @@ func main() {
 
 ```
 
+#### Golang cheatSheet!(https://devhints.io/go)
 
