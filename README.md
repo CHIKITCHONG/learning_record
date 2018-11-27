@@ -1,24 +1,5 @@
 # learning_record
-### 学习记录
 
- 
-
-#### golang websocket develop
-- websocket js实现
-- golang写服务器响应<br>
-## main code
-### 库相关
-1.[这是应该是一个比较简单的 websocket 应用。](https://blog.csdn.net/lhtzbj12/article/details/79357336)<br>
-2.[当然这个库貌似比较旧 ，进一步的话可以研究这个库:](https://github.com/gorilla/websocket)
-### websocket 教程
-1.[阮一峰 WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)<br>
-2.[用 Go 编写一个简单的 WebSocket 推送服务](https://juejin.im/post/5ac0e11f518825555e5dfd1c)<br>
-3.[Golang代码搜集-基于websocket+vue.js的简易聊天室](https://blog.csdn.net/lhtzbj12/article/details/79357336)<br>
-4.[基于golang的websocket](https://www.jianshu.com/p/65ef71ddb910)<br>
-5.[golang echo with gorilla/websocket](http://go-echo.org/cookbook/websocket/)<br>
-6.[golang websocket simple example](https://blog.csdn.net/wangshubo1989/article/details/79140278)
-<br>
-<br>
 ### 问题记录
 `1.net/url里的url.URL是一个结构体 初始化时需要填好相应的字段`
 ![net/url包url.URL参数](https://github.com/CHIKITCHONG/learning_record/blob/master/WechatIMG20.png)
@@ -425,3 +406,36 @@ err := db.Model(book).Where("id = ?", 1).Select()
 // SELECT "book"."id", "book"."title", "book"."text"
 // FROM "books" WHERE id = 1
 ```
+
+
+### 2018-11-27
+
+#### Go命名返回值
+
+```
+Go 的返回值可被命名，它们会被视作定义在函数顶部的变量。
+
+返回值的名称应当具有一定的意义，它可以作为文档使用。
+
+没有参数的 return 语句返回已命名的返回值。也就是 直接 返回。
+
+直接返回语句应当仅用在下面这样的短函数中。在长的函数中它们会影响代码的可读性。
+
+
+package main
+
+import "fmt"
+
+func split(sum int) (x, y int) {
+	x = sum * 4 / 9
+	y = sum - x
+	return
+}
+
+func main() {
+	fmt.Println(split(17))
+}
+
+# 输出7、10
+```
+
