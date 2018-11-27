@@ -377,7 +377,47 @@ https://ieevee.com/tech/2018/08/28/go-modules.html
   - u:撤销
   - yy:复制当前行 p:黏贴当前行
 ```
-##### 编辑
+##### 底部命令模式
+```
+:set hIsearch    # 搜索模式
+	- 按/+key进行关键字向下搜索搜索、按?+key进行关键字向上搜索
+	- 搜索到之后按n，N进行 上一个/下一个跳转
+set nohIsearch	 # 取消搜索模式（取消高亮）
+
+# 替换
+e.g:
+
+160 Languages
+161 abc
+162 iyoubon
+163 century
+164 home
+# 将160-164的Language替换成mac/g
+:160,164s/Languages/mac/g
+
+e.g.2
+:1,$s/old/new 	# 将第一行至之后一行的old替换成new
+```
+##### vim 之块状选择模式
+```
+crtl + v # 代码块状选择
+- ~ 	# 所选块状全大写
+- >	# 向右缩进
+- < 	# 向左缩进
+- d 	# 所选块状删除
+```
+
+#### vim 之打开多个文件
+```
+vim file1 file2   # 按:n\:N切换至上下两个文件
+e file		  # 再打开一个文件（注：只显示当前打开的文件）
+sp file 	  # 在当前打开的文件中，上下分屏再打开一个文件
+vsp file 	  # 左右打开文件
+crtl ww 	  # 在不同窗口中切换
+:ls 	     	  # 列出来打开的文件
+:syntax on 	  # 设置语法高亮
+```
+
 
 
 ### 2018-11-26
