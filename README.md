@@ -501,3 +501,11 @@ func main() {
 
 #### Golang cheatSheet!(https://devhints.io/go)
 
+
+
+### 2018-11-29
+
+#### golang orm.db 语句：
+#### 选择除了软删除的项
+`q := db.Model(&banks).Limit(p.Limit).Offset(p.Offset).Where(notDeleted)`
+
