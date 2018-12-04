@@ -509,3 +509,14 @@ func main() {
 #### 选择除了软删除的项
 `q := db.Model(&banks).Limit(p.Limit).Offset(p.Offset).Where(notDeleted)`
 
+### 2018-12-04
+
+#### golang 时间搓(int)格式化
+```
+func formatted (t int64) string{
+	tm := time.Unix(t, 0)
+	result := tm.Format("2006-01-02")
+	return result
+}
+```
+
