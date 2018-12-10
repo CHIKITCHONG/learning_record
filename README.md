@@ -520,3 +520,46 @@ func formatted (t int64) string{
 }
 ```
 
+### 2018-12-10
+
+#### python 中的枚举类
+```
+from enum import Enum, unique
+
+
+@unique             # 保证枚举类的每个对象唯一
+class Weekday(Enum):
+    Sun = 0  # Sun的value被设定为0
+    Mon = 1
+    Tue = 2
+    Wed = 3
+    Thu = 4
+    Fri = 5
+    Sat = 6
+    Set = 0b001000
+
+
+u = Weekday.Set
+print(u.value)
+
+
+class Gender(Enum):
+    Male = 0
+    Female = 1
+
+
+class Student(object):
+    def __init__(self, name, gender):
+        self.name = name
+        self.gender = gender
+
+
+# 测试:
+bart = Student('Bart', Gender.Male)
+if bart.gender == Gender.Male:
+    print('测试通过!', Gender.Male.value)
+else:
+    print('测试失败!')
+
+
+```
