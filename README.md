@@ -576,3 +576,8 @@ func main() {
     fmt.Println(str) // print the content as a 'string'
 }
 ```
+#### 另外一个问题，mac 上如果要清除使用痕迹的话，有什么便捷的方法么
+
+```
+recovery 模式直接清除
+```
