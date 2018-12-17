@@ -56,8 +56,6 @@ type Product struct {
 // 序列化过后，可以看见
    {"name":"Xiao mi 6","number":10000,"price":2499,"is_on_sale":"false"}
 ```
-## 20181018
-![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-1.png)
 ```
 service/user_test.go
 
