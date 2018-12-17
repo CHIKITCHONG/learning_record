@@ -14,13 +14,6 @@ type Account struct {
 
 func NewAccount(svc *account.Service, ar *echo.Group)
 ```
-#### yaml 简述
-
-![yaml](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016.png)
-### omitempty 简述
-![moitempty](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-2.png)
-### patch 方法简述
-![patch](https://github.com/CHIKITCHONG/learning_record/blob/master/20181016-3.png)
 ## echo 的一些用法记录
 ```
 --1.nocontent 的作用
