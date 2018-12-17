@@ -1,13 +1,6 @@
 # learning_record
 
 ### 问题记录
-`1.net/url里的url.URL是一个结构体 初始化时需要填好相应的字段`
-![net/url包url.URL参数](https://github.com/CHIKITCHONG/learning_record/blob/master/WechatIMG20.png)
-<br>
-
-Browse activity  原生浏览器<br>
-json:"first_name,omitempty" validate:"omitempty,min=2" 意思是为空则不输出
-
 ## 2018-10-16
 ```<br>
 
