@@ -547,3 +547,32 @@ else:
 
 
 ```
+### 2018-12-17
+
+#### Golang: How to read a text file?
+```
+You only need the io/ioutil package.
+
+If you just want the content as string, then the simple solution is to use the ReadFile function from the io/ioutil package. This function returns a slice of bytes which you can easily convert to a string.
+
+
+package main
+
+import (
+    "fmt"
+    "io/ioutil"
+)
+
+func main() {
+    b, err := ioutil.ReadFile("file.txt") // just pass the file name
+    if err != nil {
+        fmt.Print(err)
+    }
+
+    fmt.Println(b) // print the content as 'bytes'
+
+    str := string(b) // convert content to a 'string'
+
+    fmt.Println(str) // print the content as a 'string'
+}
+```
