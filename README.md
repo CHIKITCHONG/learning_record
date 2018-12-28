@@ -581,3 +581,80 @@ func main() {
 ```
 recovery 模式直接清除
 ```
+
+
+### 2018-12-28
+
+#### PostgreSQL UPSERT 的功能与用法
+
+##### PostgreSQL 9.5 引入了一项新功能，即 UPSERT（insert on conflict do）。当插入遇到约束错误时，直接返回或者改为执行 UPDATE。
+
+###### Example (OnConflictDoUpdate)冲突时更新
+```
+db := modelDB()
+
+var book *Book
+for i := 0; i < 2; i++ {
+    book = &Book{
+        Id:    100,
+        Title: fmt.Sprintf("title version #%d", i),
+    }
+    _, err := db.Model(book).
+        OnConflict("(id) DO UPDATE").
+        Set("title = EXCLUDED.title").
+        Insert()
+    if err != nil {
+        panic(err)
+    }
+
+    err = db.Select(book)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(book)
+}
+
+err := db.Delete(book)
+if err != nil {
+    panic(err)
+}
+
+```
+#### Output
+```
+Book<Id=100 Title="title version #0">
+Book<Id=100 Title="title version #1">
+```
+
+
+###### Example (OnConflictDoNothing)
+```
+db := modelDB()
+
+book := Book{
+    Id:    100,
+    Title: "book 100",
+}
+
+for i := 0; i < 2; i++ {
+    res, err := db.Model(&book).OnConflict("DO NOTHING").Insert()
+    if err != nil {
+        panic(err)
+    }
+    if res.RowsAffected() > 0 {
+        fmt.Println("created")
+    } else {
+        fmt.Println("did nothing")
+    }
+}
+
+err := db.Delete(&book)
+if err != nil {
+    panic(err)
+}
+```
+##### Output
+```
+created
+did nothing
+```
