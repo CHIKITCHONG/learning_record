@@ -658,3 +658,54 @@ if err != nil {
 created
 did nothing
 ```
+
+### 2019-1-4
+#### range over interface{} which stores a slice
+```
+Given the scenario where you have a function which accepts t interface{}. If it is determined that the t is a slice, how do I range over that slice? I will not know the incoming type, such as []string, []int or []MyType, at compile time.
+
+func main() {
+    data := []string{"one","two","three"}
+    test(data)
+    moredata := []int{1,2,3}
+    test(data)
+}
+
+func test(t interface{}) {
+    switch reflect.TypeOf(t).Kind() {
+    case reflect.Slice:
+        // how do I iterate here?
+        for _,value := range t {
+            fmt.Println(value)
+        }
+    }
+}
+
+## 运行结果是报错: prog.go:16:18: cannot range over t (type interface {})
+
+### 正确的代码
+Well I used reflect.ValueOf and then if it is a slice you can call Len() and Index() on the value to get the len of the slice and element at an index. I don't think you will be able to use the range operate to do this.
+
+package main
+
+import "fmt"
+import "reflect"
+
+func main() {
+    data := []string{"one","two","three"}
+    test(data)
+    moredata := []int{1,2,3}
+    test(moredata)
+} 
+
+func test(t interface{}) {
+    switch reflect.TypeOf(t).Kind() {
+    case reflect.Slice:
+        s := reflect.ValueOf(t)
+
+        for i := 0; i < s.Len(); i++ {
+            fmt.Println(s.Index(i))
+        }
+    }
+}
+```
