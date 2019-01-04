@@ -709,7 +709,7 @@ func test(t interface{}) {
     }
 }
 ```
-#### git 冲突
+##### git 冲突
 ```
 <<<<<<<标记冲突开始，后面跟的是当前分支中的内容。
 
@@ -720,5 +720,19 @@ HEAD指向当前分支末梢的提交。
 >>>>>>>之后的dev是该分支的名字。
 
 对于简单的合并，手工编辑，然后去掉这些标记，最后像往常的提交一样先add再commit即可。
+
+```
+
+##### continue
+`continue只在for循环中出现 一旦遇到continue 则跳过进入下一项`
+```
+func main() {
+	for i := 0; i < 10; i++ {
+		if i == 5 {
+			continue
+		}
+		fmt.Println("---debug---", i)
+	}
+}
 
 ```
