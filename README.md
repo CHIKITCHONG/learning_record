@@ -737,8 +737,46 @@ func main() {
 
 ```
 ### 2019-1-8
-#### 在线 redis 演示：try.redis.io
+
 #### git checkout xxx
 ##### 检查分支是否存在, 没有就新建分支
 ##### git merge --no-off xx(合并xx分支到当前分支 保留 commit 记录)
+
+#### redis
+#### 在线 redis 演示：try.redis.io
+```
+# 对非空字符串进行 SETRANGE
+
+redis> SET greeting "hello world"
+OK
+
+redis> SETRANGE greeting 6 "Redis"
+(integer) 11
+
+redis> GET greeting
+"hello Redis"
+
+
+# 对空字符串/不存在的 key 进行 SETRANGE
+
+redis> EXISTS empty_string
+(integer) 0
+
+redis> SETRANGE empty_string 5 "Redis!"   # 对不存在的 key 使用 SETRANGE
+(integer) 11
+
+redis> GET empty_string                   # 空白处被"\x00"填充
+"\x00\x00\x00\x00\x00Redis!"
+
+```
+#### 字符串操作(加减)
+```
+strien xxx redis     (获取key xx 的长度)
+getrange xx 1 -1 	(获取key xx 从一到末的长度)
+mset key:1 1 key:2 2 (设置多个key)
+incr key:1 			(redis 把字符串和数字统称为字符串，可以直接进行加减操作)
+append key:1 12
+4					(状态成功)
+get key:1
+"1212"				(append是直接拼接字符串)
 ```
