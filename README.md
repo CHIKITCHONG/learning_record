@@ -736,3 +736,9 @@ func main() {
 }
 
 ```
+### 2019-1-8
+#### 在线 redis 演示：try.redis.io
+#### git checkout xxx
+##### 检查分支是否存在, 没有就新建分支
+##### git merge --no-off xx(合并xx分支到当前分支 保留 commit 记录)
+```
