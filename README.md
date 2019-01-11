@@ -876,3 +876,25 @@ go=# select * from storys;
 ## 输出
 [Story<1 Cool story User(1 admin [admin1@admin admin2@admin])> Story<2 cool User(1 admin [admin1@admin admin2@admin])>]
 ```
+- pg.IN
+```
+# 文档中的描述
+// In accepts a slice and returns a wrapper that can be used with PostgreSQL
+// IN operator:
+//
+//    Where("id IN (?)", pg.In([]int{1, 2, 3, 4}))
+//
+// produces
+//
+//    WHERE id IN (1, 2, 3, 4)
+
+E.G:
+func (ShopCartDB) FindWithUidAndCartIds(db orm.DB, uid int, ids []int) ([]*model.UserShopCart, error) {
+	carts := make([]*model.UserShopCart, 0)
+	err := db.Model(&carts).Column("user_shop_cart.*", "Product").Where("user_id = ? ", uid).
+		Where("\"user_shop_cart\".id IN (?)", pg.In(ids)).Select()
+	return carts, err
+}
+
+
+```
