@@ -864,4 +864,15 @@ func main() {
 	}
 	fmt.Println(storys)
 }
+
+## 输出
+go=# select * from storys;
+ id |   title    | author_id 
+----+------------+-----------
+  1 | Cool story |         1
+  2 | cool       |         1
+(2 rows)
+
+## 输出
+[Story<1 Cool story User(1 admin [admin1@admin admin2@admin])> Story<2 cool User(1 admin [admin1@admin admin2@admin])>]
 ```
