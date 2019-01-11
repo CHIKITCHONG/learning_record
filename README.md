@@ -783,6 +783,6 @@ get key:1
 
 ### 2019-1-11
 #### 补充一些 pg 的资料
-- 检查是否存在（exist）
+- 检查是否存在（exist）<br>
 `exist,err:=db.Model(&Order{}).Where("out_trade_no = ?",orderNum).Exists()`
 
