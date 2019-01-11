@@ -780,3 +780,9 @@ append key:1 12
 get key:1
 "1212"				(append是直接拼接字符串)
 ```
+
+### 2019-1-11
+#### 补充一些 pg 的资料
+- 检查是否存在（exist）
+`exist,err:=db.Model(&Order{}).Where("out_trade_no = ?",orderNum).Exists()`
+
