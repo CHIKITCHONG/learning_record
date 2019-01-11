@@ -896,5 +896,41 @@ func (ShopCartDB) FindWithUidAndCartIds(db orm.DB, uid int, ids []int) ([]*model
 	return carts, err
 }
 
+## 多重 IN 
+func (ShopCartDB) DelWithUidAndCartId(db orm.DB, uid int, ids []int) (bool, error) {
+	result, err := db.Model((*model.UserShopCart)(nil)).
+		Where("user_id = ? ", uid).
+		Where("id IN (?)", pg.In(ids)).
+		Delete()
+	if err != nil {
+		return false, err
+	}
+	return result.RowsAffected() > 0, nil
+}
+```
 
+### sql UNION与UNION ALL 命令
+```
+UNION 操作符用于合并两个或多个 SELECT 语句的结果集。
+请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。
+# 注释：默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。
+
+使用 UNION ALL 命令
+实例：
+列出在中国和美国的所有的雇员：
+
+SELECT E_Name FROM Employees_China
+UNION ALL
+SELECT E_Name FROM Employees_USA
+
+结果
+E_Name
+Zhang, Hua
+Wang, Wei
+Carter, Thomas
+Yang, Ming
+Adams, John
+Bush, George
+Carter, Thomas
+Gates, Bill
 ```
