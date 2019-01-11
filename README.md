@@ -820,9 +820,8 @@ type Story struct {
 	Author   *User
 	tableName struct{} `sql:"storys"`
 }
-
-- 关联查询
-* 我们可以按条件关联查询
+```
+- 关联查询(我们可以按条件关联查询)
 ```
 // Select story and associated author in one query
 story := new(Story)
