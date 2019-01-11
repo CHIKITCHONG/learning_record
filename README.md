@@ -785,4 +785,23 @@ get key:1
 #### 补充一些 pg 的资料
 - 检查是否存在（exist）<br>
 `exist,err:=db.Model(&Order{}).Where("out_trade_no = ?",orderNum).Exists()`
-
+- 查询所有 <br>
+```
+// Select all users.
+var users []User
+err = db.Model(&users).Select()
+if err != nil {
+    panic(err)
+}
+fmt.Println(users)
+```
+- 通过主键查询
+```
+// Select user by primary key.
+user := &User{Id: 1}
+err := db.Select(user)
+if err != nil {
+    panic(err)
+}
+fmt.Println(user)
+```
