@@ -805,7 +805,9 @@ if err != nil {
 }
 fmt.Println(user)
 ```
-- Select book user WHERE … AND (… OR …):（条件或）
+#### Select book user WHERE … AND (… OR …):（条件或）
+
+- 关联查询(我们可以按条件关联查询)
 ```
 type User struct {
 	Id     int64
@@ -820,9 +822,7 @@ type Story struct {
 	Author   *User
 	tableName struct{} `sql:"storys"`
 }
-```
-- 关联查询(我们可以按条件关联查询)
-```
+
 // Select story and associated author in one query
 story := new(Story)
 err = db.Model(story).
@@ -833,4 +833,35 @@ if err != nil {
 	panic(err)
 }
 fmt.Println(story)
+
+# 输出
+Story<1 Cool story User(1 admin [admin1@admin admin2@admin])>
+```
+- 关联查询所有
+```
+type User struct {
+	Id     int64
+	Name   string
+	Emails []string
+	tableName struct{} `sql:"users"`
+}
+type Story struct {
+	Id       int64
+	Title    string
+	AuthorId int64
+	Author   *User
+	tableName struct{} `sql:"storys"`
+}
+
+func main() {
+	db:=connet()
+	var storys []Story
+
+	err:=db.Model(&storys).Column("story.*").Relation("Author").Select()
+
+	if err!=nil{
+		panic(err)
+	}
+	fmt.Println(storys)
+}
 ```
