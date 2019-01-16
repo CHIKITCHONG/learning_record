@@ -965,3 +965,34 @@ go 中第三方包的管理
 
 再会。
 ```
+
+#### golang 中channel 的简单例子
+##### E.G. 并发中线程的通信机制
+```
+// 定义goroutine 1
+func Echo(out chan<- string) {  					// 定义输出通道类型
+	time.Sleep(1*time.Second)
+	out <- "咖啡色的羊驼"
+	close(out)
+}
+
+// 定义goroutine 2
+func Receive(out chan<- string, in <-chan string) { // 定义输出通道类型和输入类型
+	temp := <-in 				    // 阻塞等待 echo 的通道的返回
+	out <- temp				    // 收到 echo 通道弹出的消息后才会执行这里
+	close(out)			            // 一环扣一环 通过阻塞 达到进程间的互相联系
+}
+
+func main() {
+	echo := make(chan string)
+	receive := make(chan string)
+
+	go Echo(echo)
+	go Receive(receive, echo)
+
+	getStr := <-receive   // 接收goroutine 2的返回
+
+	fmt.Println(getStr)
+}
+
+```
