@@ -949,3 +949,37 @@ func main() {
 }
 
 ```
+
+#### 接上,golang 中 Channel 的简单例子（调度携程使用函数）
+```
+# 在使用 gorounite 时，一些函数有返回值，单纯的 go 语句并不会捕获返回值
+# 所以需要这么写
+package main
+
+import (
+    "fmt"
+)
+
+//学生结构体(实体)
+type Stu struct {
+    Name string
+    Age  int
+}
+
+func say(name string) Stu {
+    fmt.Printf("%s say\n", name)
+    stu := Stu{Name: name, Age: 18}
+    return stu
+}
+func main() {
+    c := make(chan int)
+    go func() {
+        stu := say("lisi") //返回一个学生实体
+        fmt.Printf("我叫%s，年龄%d\n", stu.Name, stu.Age)
+        c <- 1 //信号位表示调用完毕
+    }()
+    fmt.Println("go func")
+    <-c
+    fmt.Println("end")
+}
+```
