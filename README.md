@@ -950,6 +950,20 @@ func main() {
 
 ```
 
+#### golang 中 chnnel 死锁示例
+```
+func say(s string, c chan int) {
+    fmt.Printf("%s say\n", s)
+    //c <- 1 这里本来应该给c管道传值的，结果没传
+}
+func main() {
+    c := make(chan int)
+    go say("lisi", c)
+    v1 := <-c //这里会一直阻塞，导致死锁
+    fmt.Printf("lisi:%d\n", v1)  //前面死锁，这里无法输出
+}
+```
+
 #### 接上,golang 中 Channel 的简单例子（调度携程使用函数）
 ```
 # 在使用 gorounite 时，一些函数有返回值，单纯的 go 语句并不会捕获返回值
