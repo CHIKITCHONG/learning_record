@@ -1,47 +1,8 @@
 # learning_record
 
-### 问题记录
-## 2018-10-16
-```<br>
-
-#传和返回结构体都是以*结构体的方式
-
-eg:
-
-type Account struct {
-	svc *account.Service
-}
-
-func NewAccount(svc *account.Service, ar *echo.Group)
-```
-## echo 的一些用法记录
-```
---1.nocontent 的作用
-return c.NoContent(http.StatusOK)`
-# 文档描述
-NoContent sends a response with no body and a status code.
-NoContent(code int) error
-
---2.c.Request().UserAgent(),    
-# 文档描述
-// Request() *http.Request
-
-
---3.c.RealIP()
-# 文档描述
-// RealIP returns the client's network address based on `X-Forwarded-For`
-```
-## 函数中的指针引用
-```
-type Tools struct {
-}
-
-func NewTools(tr *echo.Group) {
-	t := &Tools{}   	#去掉{}:Cannot take the address of 'Tools' 
-
-```
-
-## golang strust json 序列化操作的一些问题记录
+## 问题记录
+### 2018-10-16
+### golang strust json 序列化操作的一些问题记录
 
 ```
 // Product _
@@ -63,14 +24,6 @@ service/user_test.go
 需要一个新的user的service服务，和一个已分组的echo路由
 user.New(nil, tt.udb, tt.rbac, tt.auth)是已经初始化的user的service对象，rg是echo的r路由的分组
 ```
-![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-2.png)
-```
-strconv.Atoic.Param("id"),这样捕获的id之后，strconv.Atoic.Param将只接受数字类型，
-如果不是的话，就会报错
-```
-`http://tool.oschina.net/codeformat/json`在线格式化代码
-
-
 ## 20181023
 [psql的一些命令](https://blog.csdn.net/smstong/article/details/17138355)
 ## 20181024
