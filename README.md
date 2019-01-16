@@ -983,3 +983,4 @@ func main() {
     fmt.Println("end")
 }
 ```
+##### linux 中显示 unix 时间：date +%s
