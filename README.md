@@ -934,3 +934,34 @@ Bush, George
 Carter, Thomas
 Gates, Bill
 ```
+### 2019-1-16
+#### golang 包管理
+```
+4. 包管理
+通过上文，我们已经知道如何导入包、导入包的几种方式、第三方包的下载、下载包的存放路径等。
+
+那自己创建的项目中如何管理第三方包呢? 即：将用到的第三方包移至个人项目工程下。
+
+govendor 。
+
+虽然存在多种包的管理方式。但我觉得现在的这种方式挺友好的。
+
+下载
+go get -u github.com/kardianos/govendor
+govendor init
+这一步触发的动作是创建：vendor 目录 和 vendor.json 文件
+
+govendor add +external
+这一步触发的动作是：将自己项目中使用到的第三方库，复制到vendor 目录下，并维护vendor.json文件
+
+总结：通过本节，你会知道
+
+go 的工作空间的文件系统组成
+go 中包的导入方式
+go 中第三方包的管理
+下节我们写代码，看代码，分析代码。
+
+希望对你有所启发。
+
+再会。
+```
