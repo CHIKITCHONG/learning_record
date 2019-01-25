@@ -1028,3 +1028,49 @@ diff -y A B  模拟将屏幕分成两部分，显示B文件增加或删除的信
 numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 sum(numbers...) // 和sum(1, 2, 3, 4, 5, 6, 7, 8, 9. 10)等价
 ```
+### 2019-1-25
+#### golang 的 panic 与 recover()
+```
+# golang中没有try... catch...，所以当golang中遇到panic时，如果不进行recover，便会导致整个程序挂掉，具体例子如下：
+
+package main
+ 
+import (
+	"fmt"
+)
+ 
+func main() {
+	panic("fault")
+	fmt.Println("panic")
+}
+运行结果：
+panic: fault  
+  goroutine 16 [running]:...
+
+# 解决办理：利用defer延迟处理的recover进行恢复，具体例子如下：
+package main
+ 
+import (
+    "fmt"
+)
+ 
+func main() {
+    defer func() {
+        fmt.Println("1")
+    }()
+    defer func() {
+        if err := recover(); err != nil {
+            fmt.Println(err)
+        }
+    }()
+    panic("fault")
+    fmt.Println("2")
+}
+ 
+运行结果：
+  fault
+  1
+# 程序首先运行panic，出现故障，此时跳转到包含recover()的defer函数执行，recover捕获panic，此时panic就不继续传递．但是recover之后，程序并不会返# 回到panic那个点继续执行以后的动作，而是在recover这个点继续执行以后的动作，即执行上面的defer函数，输出１.
+
+## 注意：利用recover处理panic指令，必须利用defer在panic之前声明，否则当panic时，recover无法捕获到panic，无法防止panic扩散．
+```
