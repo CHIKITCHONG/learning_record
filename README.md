@@ -1076,3 +1076,45 @@ func main() {
 
 # recover是一个内建的函数，可以让进入令人恐慌的流程中的goroutine恢复过来。recover仅在延迟函数中有效。在正常的执行过程中，调用recover会返回nil，并且没有其它任何效果。如果当前的goroutine陷入panic，调用recover可以捕获到panic的输入值，并且恢复正常的执行。
 ```
+### 2019-1-30
+#### 一个关于匿名函数的使用
+```
+# 设定休眠时间三秒
+const SCHEDULE_RATE = time.Second * 3 // 调度暂停三秒,减轻压力
+
+# 设置管道,后面用于阻塞消息
+var ch = make(chan int)
+
+# 定义一个接受 string, error 并返回 string， error 的函数
+func Test(ss string, err error) (string, error) {
+	fmt.Println("--- debug ", ss, err)
+	return "hello world", nil
+}
+
+# 定义了一个 协程+匿名函数
+# 这里的函数接受一个 匿名函数(接受string, error为参数)
+func AysncTask(f func(string, error)) {
+	
+	# 这里开一个协程,接受一个匿名函数
+	go func(fun func(string, error)) {
+		for {
+			job, err := Test("hello", nil)
+			fmt.Println("--job--", job)
+			if len(job) < 0 {
+				fun(job, err)
+				fmt.Println("****debug****")
+			} else {
+				time.Sleep(SCHEDULE_RATE)
+			}
+			//ch <- 1
+		}
+	}(f)# 匿名函数的参数, 这里的 f 是参数中 f 之后fun(string, error)
+}
+
+func main() {
+	AysncTask(func(str string, e error) {
+		fmt.Println("执行逻辑函数")
+	})
+	<- ch
+}
+```
