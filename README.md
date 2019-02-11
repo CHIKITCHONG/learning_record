@@ -1146,3 +1146,20 @@ tail可运行文件一般在/usr/bin/以下。
 3、tail -r -n 10 filename
 说明：逆序显示filename最后10行。
 ```
+
+### 2019-2-11
+#### 关于GOPROXY
+```
+关于 $GOPROXY
+
+当我们使用go的时候，go默认会直接从代码库中去下载所需的相关依赖，GOPROXY 这个环境变量可以让我们控制自己从哪里去下载源代码，如果 GOPROXY 没有设置，go 会直接从代码库下载相关依赖代码。如果你像下面这样设置了这个环境变量，那么你就会通过 goproxy.io 下载所有的源代码。
+# export GOPROXY=https://goproxy.io 
+
+你可以通过置空这个环境变量来关闭，export GOPROXY=
+如果要开机、全局生效的就要在/etc/profile中也加入即可。
+查看当前系统中的变量,这里过滤GO的配置
+[root@nginx-web ~]# export|grep "GO" 
+declare -x GO111MODULE="on" 
+declare -x GOPROXY="https://goproxy.io" 
+declare -x GOROOT="/opt/go" 
+```
