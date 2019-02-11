@@ -1163,3 +1163,9 @@ declare -x GO111MODULE="on"
 declare -x GOPROXY="https://goproxy.io" 
 declare -x GOROOT="/opt/go" 
 ```
+#### 关于 linux 的"一切皆文件"是什么意思
+```
+一切皆是文件”是 Unix/Linux 的基本哲学之一，不仅普通的文件，目录、字符设备、块设备、 套接字等在 Unix/Linux 中都是以文件被对待；它们虽然类型不同，但是对其提供的却是同一套操作界面。(同一套操作界面是指对外统一用命令行操作？)
+把一切都当成文件来看待，不论你是光驱，还是USB什么的，你都是一个文件。
+其实都在于linux的 VFS Virtual File System 虚拟文件系统
+```
