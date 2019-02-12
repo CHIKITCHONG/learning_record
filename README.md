@@ -1169,3 +1169,21 @@ declare -x GOROOT="/opt/go"
 把一切都当成文件来看待，不论你是光驱，还是USB什么的，你都是一个文件。
 其实都在于linux的 VFS Virtual File System 虚拟文件系统
 ```
+
+
+### 2019-2-12
+
+#### 简述 gRPC 和 protobuf
+```
+gRPC 一开始由 google 开发，是一款语言中立、平台中立、开源的远程过程调用(RPC)系统。
+在 gRPC 里客户端应用可以像调用本地对象一样直接调用另一台不同的机器上服务端应用的方法，使得您能够更容易地创建分布式应用和服务。与许多 RPC 系统类似，gRPC 也是基于以下理念：定义一个服务，指定其能够被远程调用的方法（包含参数和返回类型）。在服务端实现这个接口，并运行一个 gRPC 服务器来处理客户端调用。在客户端拥有一个存根能够像服务端一样的方法。
+
+特性：
+基于HTTP/2 
+HTTP/2 提供了连接多路复用、双向流、服务器推送、请求优先级、首部压缩等机制。可以节省带宽、降低TCP链接次数、节省CPU，帮助移动设备延长电池寿命等。gRPC 的协议设计上使用了HTTP2 现有的语义，请求和响应的数据使用HTTP Body 发送，其他的控制信息则用Header 表示。
+
+IDL使用ProtoBuf  
+IDL(交互式数据语言Interactive Data Language)
+gRPC使用ProtoBuf来定义服务，ProtoBuf是由Google开发的一种数据序列化协议（类似于XML、JSON、hessian）。ProtoBuf能够将数据进行序列化，并广泛应用在数据存储、通信协议等方面。压缩和传输效率高，语法简单，表达力强。
+多语言支持（C, C++, Python, PHP, Nodejs, C#, Objective-C、Golang、Java） 
+```
