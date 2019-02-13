@@ -1223,5 +1223,7 @@ GO111MODULE=auto 在 $GOPATH/src 外面且根目录有 go.mod 文件时，开启
 ### 2019-2-13
 #### 关于 grpc、twirp 两个 grpc 框架
 ```
-grpc、twirp 都是两个grpc框架
+grpc、twirp 都是两个grpc框架，其中 grpc 支持 http2,只接收 protobuf,而 twirp 可以接收 json 
+序列化还有 protobuf 序列化, 写好 proto 生成文件时，生成了twirp 文件，但并没有使用twirp的网关
+功能，而是使用了 twrip 的json序列化或protobuf序列化功能，再经过 grpc
 ```
