@@ -1218,3 +1218,10 @@ GO111MODULE=auto 在 $GOPATH/src 外面且根目录有 go.mod 文件时，开启
 在使用模块的时候，GOPATH 是无意义的，不过它还是会把下载的依赖储存在 $GOPATH/pkg/mod 中，也会把 go install 的结果放在 $GOPATH/bin 中。
 # https://segmentfault.com/a/1190000016146377 go mod的概述
 ```
+
+
+### 2019-2-13
+#### 关于 grpc、twirp 两个 grpc 框架
+```
+grpc、twirp 都是两个grpc框架
+```
