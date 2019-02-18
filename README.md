@@ -1249,3 +1249,11 @@ Usage of ./main:
 
 
 ```
+
+#### 关于 pg 的 pg_dump
+```
+pg_dump 是 pg 执行脚本的 bash
+例子：
+### 运行生成本地数据库的 ./cmd/migration/main.go 生成本地数据库
+pg_dump -h 127.0.0.1 -p 5432 gcrpc-user > gcrpc_user.sql
+```
