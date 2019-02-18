@@ -1227,3 +1227,25 @@ grpc、twirp 都是两个grpc框架，其中 grpc 支持 http2,只接收 protobu
 序列化还有 protobuf 序列化, 写好 proto 生成文件时，生成了twirp 文件，但并没有使用twirp的网关
 功能，而是使用了 twrip 的json序列化或protobuf序列化功能，再经过 grpc
 ```
+
+### 2019-2-18
+#### 关于 go 中 flag 包的使用
+```
+flag 包主要是实现命令行工具的包
+例子：
+func main () {
+	// 测试使用 flag 包
+	flag.String("p", "./config/file/config.dev.yaml", "Path to config file")
+	flag.Parse()
+}
+# 之后再 go build main.go(./main.go)
+# 在命令行中执行./main -p
+# 可以看见输出：
+CHIKITCHONGdeiMac:learnsql chikitchong$ ./main -p
+flag needs an argument: -p
+Usage of ./main:
+  -p string
+        Path to config file (default "./config/file/config.dev.yaml")
+
+
+```
