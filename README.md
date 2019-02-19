@@ -1257,3 +1257,5 @@ pg_dump 是 pg 执行脚本的 bash
 ### 运行生成本地数据库的 ./cmd/migration/main.go 生成本地数据库
 pg_dump -h 127.0.0.1 -p 5432 gcrpc-user > gcrpc_user.sql
 ```
+### 2019-2-19
+#### go mod 的 wiki （https://github.com/golang/go/wiki/Modules）
