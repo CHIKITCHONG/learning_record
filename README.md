@@ -1259,3 +1259,25 @@ pg_dump -h 127.0.0.1 -p 5432 gcrpc-user > gcrpc_user.sql
 ```
 ### 2019-2-19
 #### go mod 的 wiki （https://github.com/golang/go/wiki/Modules）
+```
+Linux 下 make 命令是系统管理员和程序员用的最频繁的命令之一。管理员用它通过命令行来编译和安装很多开源的工具
+当 make 命令第一次执行时，它扫描 Makefile 找到目标以及其依赖。
+如果这些依赖自身也是目标，继续为这些依赖扫描 Makefile 建立其依赖关系，然后编译它们。
+ -1.make -B 会强制编译所有的目标文件以及最终的执行文件。
+ -2.使用 -d 选项打印调试信息,如果你想知道 make 执行时实际做了什么，使用 -d 选项。
+ -3.使用 -C 选项改变目录,你可以为 make 命令提供不同的目录路径，在寻找 Makefile 之前会切换目录的。
+    这是一个目录，假设你就在当前目录下:
+    $ ls 
+    file file2 frnd frnd1.cpp log1.txt log3.txt log5.txt
+    file1 file name with spaces frnd1 frnd.cpp log2.txt log4.txt
+    但是你想运行的 make 命令的 Makefile 文件保存在 ../make-dir/ 目录下，你可以这样做：
+    $ make -C ../make-dir/ 
+    make: Entering directory `/home/himanshu/practice/make-dir’ 
+    make: Nothing to be done for `all’. 
+    make: Leaving directory `/home/himanshu/practice/make-dir
+    你能看到 make 命令首先切到特定的目录下，在那执行，然后再切换回来。
+  -4.通过 -f 选项将其它文件看作 Makefile
+    如果你想将重命名 Makefile 文件，比如取名为 my_makefile 或者其它的名字，我们想让 make 将它也当成 Makefile，可以使用 -f 选项。
+    make -f my_makefile
+    通过这种方法，make 命令会选择扫描 my_makefile 来代替 Makefile。
+```
