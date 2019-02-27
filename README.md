@@ -1288,3 +1288,27 @@ Linux 下 make 命令是系统管理员和程序员用的最频繁的命令之�
 git push origin feature-branch:feature-branch    
 //推送本地的feature-branch(冒号前面的)分支到远程origin的feature-branch(冒号后面的)分支(没有会自动创建)
 ```
+
+
+### 2019-2-27
+#### 关于 golang 接口的补充
+`两个实现一样方法的接口，是一样的`
+```
+type Service struct {}
+
+func (s *Service) Method1 ()
+func (d *Service) Method2 ()
+
+type Auth interface {
+	Method1 ()
+	Method2 ()
+}
+
+# 一个函数:
+func New(user Auth) (){}
+
+codi = new(Service)
+
+a = New(codi)
+# 这样是可以调用的，因为 Service 实现了接口的两个方法
+```
