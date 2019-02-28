@@ -1312,3 +1312,9 @@ codi = new(Service)
 a = New(codi)
 # 这样是可以调用的，因为 Service 实现了接口的两个方法
 ```
+### 2019-2-28
+#### 关于 curl 命令的一次使用 (post请求)
+```
+-H 是 header
+curl -X POST "https://xx.xxxxx.com/gcrpc/xx.Svc/List" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"category_id\": \"1\", \"page\": \"1\", \"limit\": \"1\"}"
+```
