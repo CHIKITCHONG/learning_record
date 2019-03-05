@@ -1318,3 +1318,7 @@ a = New(codi)
 -H 是 header
 curl -X POST "https://xx.xxxxx.com/gcrpc/xx.Svc/List" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"category_id\": \"1\", \"page\": \"1\", \"limit\": \"1\"}"
 ```
+
+### 2019-3-5
+#### epoll
+`https://zhuanlan.zhihu.com/p/36764771`
