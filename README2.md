@@ -122,3 +122,43 @@ func main(){
 }
 ```
 
+
+
+### 2019-3-22
+
+`当收到一些不规则的json回复类似：`
+
+```markdown
+filename="goodcs-dir/113b152de2-7a16-402a-982f-87e1709a594eImage.png"&size=312038&mimeType="image/png"&height=949&width=1856
+
+# 并不是标准的：
+{
+    "xxx": x,
+    "xxxx": "xxxx",
+}
+```
+
+##### 这时需要分割字符(&),构造字典
+
+```go
+//e.g.
+/*[filename="goodcs-dir/113b152de2-7a16-402a-982f-87e1709a594eImage.png"
+size=312038 mimeType="image/png" height=949 width=1856]
+*/
+func Handle(req string) (resp map[string]string) {
+	condi := make(map[string]string)
+	result := strings.Split(req, "&")
+	for _, v := range result {
+		v := strings.Split(v, "=")
+		condi[v[0]] = strings.Replace(v[1], `"`, "", -1)
+	}
+	return condi
+}
+```
+
+
+
+
+
+
+
