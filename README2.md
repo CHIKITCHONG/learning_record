@@ -158,4 +158,21 @@ func Handle(req string) (resp map[string]string) {
 }
 ```
 
+### 2019-3-25
+
+`golang 读取字典`
+
+```go
+func main() {
+	test := make(map[string]string)
+	test["hello"] = "nihk"
+	test["heelo2"] = "nihk2"
+	for k, v := range test {
+		fmt.Println("k", k, "v", v)
+	}
+}
+# 结果是
+k hello v nihk
+k heelo2 v nihk2
+```
 
