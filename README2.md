@@ -176,3 +176,73 @@ k hello v nihk
 k heelo2 v nihk2
 ```
 
+
+
+### 2019-3-27
+
+##### 关于 sql 联结查询(左联结是以左表为基准,右联结是以右表为基准)
+
+```go
+// 演示联结查询, 以 go-pg 为例(github.com/go-pg)
+
+type Profile struct {
+	Base
+	UserId        int64  ``
+	Name          string `sql:"type:varchar(64)"`
+	Signature     string `sql:"type:varchar(64)"`
+	Birth         string `sql:"type:varchar(64)"`
+	Job           string `sql:"type:varchar(64)"`
+	Constellation string `sql:"type:varchar(64)"`
+	Phone 		  string `sql:"type:varchar(16)"`
+}
+
+type Address struct {
+	Base
+	UserID    int64  ``
+	Name      string `sql:"type:varchar(64)"`
+	Phone     string `sql:"type:varchar(64)"`
+	Addr      string `sql:"type:varchar(64)"`
+	FirstAddr bool   `` // default 是默认地址
+}
+
+func joinsql(db *pg.DB) error {
+
+	var (
+		err	error
+		res []*pgmodel.Address
+	)
+	// 若不加入ORDER BY 两表中一个唯一的字段，就会重复打印两表中共同的值
+	_, err = db.Query(&res,
+		`SELECT s.id, s.created_at, s.updated_at, s.deleted_at,
+				s.user_id, s.name,s.phone, s.addr 
+				From addresses s
+				FULL OUTER JOIN profiles c 
+				ON s.user_id = c.user_id
+				GROUP BY s.id
+				ORDER BY s.id ASC
+				`)
+	if err != nil {
+		return err
+	}
+	time.Sleep(2 * time.Second)
+	for _, v := range res {
+		fmt.Println("查找的结果是:", v)
+	}
+
+	return nil
+}
+
+2019/04/04 18:00:43 2.388556ms | SELECT s.id, s.created_at, s.updated_at, s.deleted_at,
+				s.user_id, s.name,s.phone, s.addr 
+				From addresses s
+				LEFT OUTER JOIN profiles c 
+				ON s.user_id = c.user_id
+				GROUP BY s.id
+				ORDER BY s.id ASC
+// ------------------ 下面是结果			
+查找的结果是: &{{1 2019-03-22 15:30:32 +0800 CST 2019-03-22 15:30:37 +0800 CST <nil>} 1 zzj 13559775273 深圳益田路 false}
+查找的结果是: &{{2 2019-03-22 15:31:08 +0800 CST 2019-03-22 15:31:11 +0800 CST <nil>} 2 zzj-7 123 深圳南山 false}
+```
+
+
+
