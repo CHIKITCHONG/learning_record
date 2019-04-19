@@ -1,165 +1,15 @@
 # learning_record
 
 ## 问题记录
-### 2018-10-16
-### golang strust json 序列化操作的一些问题记录
-
-```
-// Product _
-type Product struct {
-    Name      string  `json:"name"`
-    ProductID int64   `json:"-"` // 表示不进行序列化
-    Number    int     `json:"number"`
-    Price     float64 `json:"price"`
-    IsOnSale  bool    `json:"is_on_sale,string"`
-}
- 
-// 序列化过后，可以看见
-   {"name":"Xiao mi 6","number":10000,"price":2499,"is_on_sale":"false"}
-```
-```
-service/user_test.go
-
-根据service.NewUser的路有要求：NewUser(svc *user.Service, ur *echo.Group)
-需要一个新的user的service服务，和一个已分组的echo路由
-user.New(nil, tt.udb, tt.rbac, tt.auth)是已经初始化的user的service对象，rg是echo的r路由的分组
-```
 ## 20181023
 [psql的一些命令](https://blog.csdn.net/smstong/article/details/17138355)
 ## 20181024
 #### 微信小程序不支持PATCH方法，请注意
 ## 20181025
-#### ![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181025-1.jpg)
+#### ![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/20181025-1.jpg)
 ### redis 取出time.duration 类型可用其.second方法来转换为float64类型来判断是否超时
-![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-1.png)可用
-![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/20181018-1.png)
-## 20181029
-golang websocket 微服务<br>
-https://blog.csdn.net/yueguanghaidao/article/details/46334483<br>
-```
-一个专门做推送的库，是哔哩哔哩现在用的弹幕库：
-https://github.com/Terry-Mao/goim
-https://www.kancloud.cn/liupengjie/go/706202
-```
-## 2018-10-31
-一些题：
-#### Short Declairation
-```
-# Assuming x is declared and y isnot declared, which clauses below are correct?
-x; _ := f()
-x, _ = f()
-x, y := f()
-x, y = f()
-```
-#### Subslice
-```
-# what will be printed when the code is executed?
-package main
-
-import (
-   "fmt"
-)
-func main(){
-    s := []int{1,2,3}
-    ss := s [1:]
-    ss =append(ss, 4)
-    
-    for _, v :range ss{
-        ss[i] += 10
-    }
-    
-    for i := range ss{
-        ss[i] += 10
-    }
-    fmt.Println(s)
-}
-```
-#### Map Ok-Idiom
-
-```
-# correct two mistakes in lineA and B
-
-package main
-
-func main(){
-    var m map[string]int  //A
-    m["a"] = 1
-    if v := m["b"]; v!= nil {	//B
-    	Println(v)
-    }
-}
-```
-
-#### Pointers
-
-```
-# Fill in the blanks in lineA and B,to assure the printed out is "foo"
-
-package main
-
-type S struct {
-    m string
-}
-
-func f() *S {
-    return  _  		//A 
-}
-
-func main() {
-    p := _   		//B
-    print(p, m)		//print "foo"
-}
-// Todo
-```
-
-#### Break Outer Loop
-```
-# Modify the code below, to exit the outer for loop?
-
-package main 
-
-func main() {
-    for i := 0; i < 3; i ++ {
-	for j := 0; j < 3; j++ {
-	    print(i, ",", j, " ")
-	    break
-	}
-	println()
-}
-```
-
-#### Defer Stack
-```
-# Correct a mistake about defer in the code below
-
-package main
-
-import (
-    "lo/loutil"
-    "os"
-)
-func main() {
-    f, err := os.Open("file")
-    defer f.Close()
-    if err != nil {
-    	return
-    }
-    b, err := ioutil.ReadAil(f)
-    println(string(b))
-}
-```
-## 2018-11-2
-
-post请求 $ curl 127.0.0.1:5342/ws/push -d "id=1&content=hello12"
-
-- string转成int： 
-    * int, err := strconv.Atoi(string)
-- string转成int64： 
-    * int64, err := strconv.ParseInt(string, 10, 64)
-- int转成string： 
-    * string := strconv.Itoa(int)
-- int64转成string： 
-    * string := strconv.FormatInt(int64,10)
+![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/20181018-1.png)可用
+![tupian](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/20181018-1.png)
 
 ## 2018-1103
 - go在mac上的安装与配置
@@ -190,37 +40,6 @@ if _, ok := map[key]; ok {
 
 另外golang也没有提供item是否在array当中的判断方法,如果程序里面频繁用到了这种判断,可以将array转化为以array当中的成员为key的map再用上面的方法进行判断,这样会提高判断的效率.
 ```
-#### go语言选择语句 switch case
-
-```
-switch i { 
-    case 0: 
-        fmt.Printf("0") 
-    case 1: 
-        fmt.Printf("1") 
-    case 2: 
-        fallthrough 
-    case 3: 
-        fmt.Printf("3") 
-    case 4, 5, 6: 
-        fmt.Printf("4, 5, 6") 
-    default: 
-        fmt.Printf("Default") 
-}
-
-运行上面的案例，将会得到如下结果： 
- i = 0时，输出0； 
- i = 1时，输出1； 
- i = 2时，输出3；
-
- i = 3时，输出3； 
-
- i = 4时，输出4, 5, 6； 
- i = 5时，输出4, 5, 6； 
- i = 6时，输出4, 5, 6； 
- i = 其他任意值时，输出Default
-```
-
 #### 2018-11-06
 
 ##### curl 127.0.0.1:5342/ws/push?id=1 -d "orderNumber=100&storekeeperID=1&ActualPrice=666&OrderStatus=888&PaymentStatus=999&StoreName=深圳湾1号&DistributorName=xxx"
@@ -242,12 +61,12 @@ docker镜像下载 https://hub.docker.com/
 
 
 `sql limit与offset`
-![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-19.png)
+![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/2018-11-19.png)
 
 #### 2018-11-20
 ##### 阿里云oss 封禁小程序请求问题
 ###### 小程序请求图片时，访问阿里云oss资源遭到403forbidden 
-![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-1.jpg)<br>
+![pic](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/2018-11-23-1.jpg)<br>
 `解决方法是：`
 https://www.zhihu.com/question/63977821
 在阿里云设置二级域名映射所有请求，并打开https服务
@@ -255,12 +74,12 @@ https://www.zhihu.com/question/63977821
 ```
 不仅小程序屏蔽阿里云OSS，微信也屏蔽OSS，除了图片可正常打开，其他的word、excel、rar等文件路径都被屏蔽。解决办法就是在阿里云OSS--bucket--域名管理，增加自定义的二级域名路径代替“http://XXXX.oss-cn-hangzhou.aliyuncs.com/”，这样微信就不会屏蔽了。
 ```
-![pic2](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23_2.jpg)
+![pic2](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/2018-11-23_2.jpg)
 ```
 ---------2018.5.3更新----------
 关于https问题，可以购买或申请阿里云免费的“CA证书服务”。在阿里云OSS--bucket--域名管理先增加域名绑定，再点击“证书托管”，填写公钥与私钥。这样资源文件就支持http和https两种方式访问了。
 ```
-![pic3](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-3.jpg)
+![pic3](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/2018-11-23-3.jpg)
 
 ##### 知乎上的另一个关于此问题的回答
 ```
@@ -275,11 +94,11 @@ HTTPS安全加速设置_HTTPS安全加速_增值服务_用户指南_CDN-阿里�
 https://ieevee.com/tech/2018/08/28/go-modules.html
 
 #### sql What does DESC do in SQL?
-![pic5](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-4.png)
+![pic5](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/2018-11-23-4.png)
 
 
 #### sql limit and offset
-![pic6](https://github.com/CHIKITCHONG/learning_record/blob/master/2018-11-23-5.png)
+![pic6](https://github.com/CHIKITCHONG/learning_record/blob/master/img-src/2018-11-23-5.png)
 
 
 
