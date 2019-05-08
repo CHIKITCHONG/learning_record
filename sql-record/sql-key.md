@@ -82,13 +82,13 @@ type test2 struct {
 
 - 主键索引
 
-![image-20190508175547926](/Users/chikitchong/Develop/learning_record/sql-record/README.assets/image-20190508175547926.png)
+![image-20190508175547926](https://github.com/CHIKITCHONG/learning_record/blob/master/sql-record/README.assets/image-20190508175547926.png)
 
 - 其他索引
 
-![image-20190508175633125](/Users/chikitchong/Develop/learning_record/sql-record/README.assets/image-20190508175633125.png)
+![image-20190508175633125](https://github.com/CHIKITCHONG/learning_record/blob/master/sql-record/README.assets/image-20190508175633125.png)
 
 - 没有索引
 
-![image-20190508175650900](/Users/chikitchong/Develop/learning_record/sql-record/README.assets/image-20190508175650900.png)
+![image-20190508175650900](https://github.com/CHIKITCHONG/learning_record/blob/master/sql-record/README.assets/image-20190508175650900.png)
 
